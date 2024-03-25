@@ -1,13 +1,28 @@
 version: '3'
 
 services:
-  frontend:
-    build: ./react-app
-    container_name: reactapp_c
+  db:
+    container_name: postgresDB
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: dncc
     ports:
-      - '5173:5173'
+      - '5432:5432'
   backend:
     build: ./node-server
     container_name: backend_c
+    command: sh -c "npx prisma migrate deploy --preview-feature && npm start"
+    depends_on:
+      - db
     ports:
       - '5000:5000'
+  frontend:
+    build: ./react-app
+    container_name: reactapp_c
+    depends_on:
+      - backend
+    ports:
+      - '5173:5173'

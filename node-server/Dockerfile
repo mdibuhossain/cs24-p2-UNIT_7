@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5000
+RUN apk add openssl
 
-CMD [ "npm", "start" ]
+EXPOSE 5000

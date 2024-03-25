@@ -1,0 +1,26 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String?  @db.VarChar(200)
+  email     String   @unique @db.VarChar(200)
+  password  String
+  photo     String?
+  createdAt DateTime @default(now())
+  role      Role     @default(UNASSIGNED)
+}
+
+enum Role {
+  UNASSIGNED
+  SYSTEM_ADMIN
+  STS_MANAGER
+  LANDFILL_MANAGER
+}
