@@ -4,7 +4,9 @@ import cors from "cors";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import formData from "express-form-data";
-import prisma from "./db/db.config.js";
+import authRouter from "./routes/auth.router.js";
+import userRouter from "./routes/users.router.js";
+import profileRouter from "./routes/profile.router.js";
 
 dotenv.config();
 const app = express();
@@ -17,14 +19,9 @@ app.use(formData.format());
 app.use(formData.stream());
 app.use(formData.union());
 
-app.get("/", async (req, res) => {
-  try {
-    const data = await prisma.user.findMany();
-    return res.status(200).json(data);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-});
+app.use("/auth", authRouter);
+app.use("/users", userRouter);
+app.use("/profile", profileRouter);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("server is running!");
