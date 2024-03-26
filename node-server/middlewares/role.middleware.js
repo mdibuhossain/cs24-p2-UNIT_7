@@ -31,7 +31,7 @@ export class roleMiddleware {
 
   // check if user has been assigned by any role?
   static isAssigned(req, res, next) {
-    if (!req.user.role) {
+    if (req.user.role === "UNASSIGNED") {
       return res
         .status(403)
         .json({ message: "Access denied. You are not assigned any role." });

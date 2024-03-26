@@ -1,6 +1,7 @@
 import prisma from "../db/db.config.js";
 import bcrypt from "bcryptjs/dist/bcrypt.js";
 import jwt from "jsonwebtoken";
+import { encryptPass } from "../utils/utils.js";
 
 export class authController {
   static async login(req, res) {
@@ -60,12 +61,10 @@ export class authController {
       if (!bcrypt.compareSync(oldPassword, findUser.password)) {
         return res.status(400).json({ errors: "Invalid credentials" });
       } else {
-        const salt = bcrypt.genSaltSync(3);
-        const hashedPassword = bcrypt.hashSync(newPassword, salt);
         await prisma.user.update({
           where: { id: findUser.id },
           data: {
-            password: hashedPassword,
+            password: encryptPass(newPassword),
           },
         });
         return res

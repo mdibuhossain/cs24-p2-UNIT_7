@@ -1,4 +1,4 @@
-import { PrismaClient, Role } from "@prisma/client";
+import { PrismaClient, RoleList } from "@prisma/client";
 import bcrypt from "bcryptjs/dist/bcrypt.js";
 
 const prisma = new PrismaClient({
@@ -6,6 +6,18 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
+  const roles = await prisma.role.findMany();
+  if (!(roles.length > 0)) {
+    await prisma.role.createMany({
+      data: [
+        { title: RoleList.SYSTEM_ADMIN },
+        { title: RoleList.STS_MANAGER },
+        { title: RoleList.LANDFILL_MANAGER },
+        { title: RoleList.UNASSIGNED },
+      ],
+    });
+  }
+
   const email = "admin@admin.com";
   const findUser = await prisma.user.findUnique({
     where: { email },
@@ -19,7 +31,7 @@ async function main() {
       name: "Admin",
       email: "admin@admin.com",
       password: bcrypt.hashSync("admin", salt),
-      role: Role.SYSTEM_ADMIN,
+      role: RoleList.SYSTEM_ADMIN,
     },
   });
 }

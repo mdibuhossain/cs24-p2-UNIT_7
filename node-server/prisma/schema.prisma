@@ -15,10 +15,15 @@ model User {
   password  String
   photo     String?
   createdAt DateTime @default(now())
-  role      Role     @default(UNASSIGNED)
+  role      RoleList @default(UNASSIGNED)
 }
 
-enum Role {
+model Role {
+  id    Int      @id @default(autoincrement())
+  title RoleList @unique
+}
+
+enum RoleList {
   UNASSIGNED
   SYSTEM_ADMIN
   STS_MANAGER
