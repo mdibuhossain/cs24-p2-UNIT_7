@@ -20,7 +20,9 @@ export const authMiddleware = (req, res, next) => {
     if (!findUser) {
       return res.status(401).json({ message: "Unauthorized" });
     } else if (findUser.role === "UNASSIGNED") {
-      return res.status(403).json({ message: "Access denied. You are not assigned any role." });
+      return res
+        .status(403)
+        .json({ message: "Access denied. You are not assigned any role." });
     }
     req.user = findUser;
     next();

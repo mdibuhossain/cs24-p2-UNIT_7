@@ -14,9 +14,9 @@ export class usersController {
           createdAt: true,
         },
       });
-      res.status(200).json(users);
+      return res.status(200).json(users);
     } catch (error) {
-      res.status(500).json({ errors: error.message });
+      return res.status(500).json({ errors: error.message });
     }
   }
   static async getUser(req, res) {
@@ -28,9 +28,10 @@ export class usersController {
       if (!findUser) {
         return res.status(404).json({ errors: "User not found" });
       }
-      res.status(200).json(findUser);
+      const { password, ...rest } = findUser;
+      return res.status(200).json(rest);
     } catch (error) {
-      res.status(500).json({ errors: error.message });
+      return res.status(500).json({ errors: error.message });
     }
   }
   static async createUser(req, res) {
@@ -45,9 +46,9 @@ export class usersController {
         },
       });
       const { password: pass, ...rest } = newUser;
-      res.status(201).json(rest);
+      return res.status(201).json(rest);
     } catch (error) {
-      res.status(500).json({ errors: error.message });
+      return res.status(500).json({ errors: error.message });
     }
   }
 
@@ -74,7 +75,7 @@ export class usersController {
           },
         });
         const { password: pass, ...rest } = updatedUser;
-        res.status(201).json(rest);
+        return res.status(201).json(rest);
       } else if (currentUser.id === parseInt(uid)) {
         const updatedUser = await prisma.user.update({
           where: { id: parseInt(uid) },
@@ -83,10 +84,10 @@ export class usersController {
           },
         });
         const { password: pass, ...rest } = updatedUser;
-        res.status(201).json(rest);
+        return res.status(201).json(rest);
       }
     } catch (error) {
-      res.status(500).json({ errors: error.message });
+      return res.status(500).json({ errors: error.message });
     }
   }
 
@@ -100,19 +101,41 @@ export class usersController {
         return res.status(404).json({ errors: "User not found" });
       }
       await prisma.user.delete({ where: { id: parseInt(uid) } });
-      res.status(204).json({ message: "User deleted" });
+      return res.status(204).json({ message: "User deleted" });
     } catch (error) {
-      res.status(500).json({ errors: error.message });
+      return res.status(500).json({ errors: error.message });
     }
   }
 
   static async getRoles(req, res) {
-    // This is a placeholder for the getRoles function
-    res.send("Get Roles route");
+    try {
+      const roles = await prisma.role.findMany();
+      return res.status(200).json(roles);
+    } catch (error) {
+      return res.status(500).json({ errors: error.message });
+    }
   }
-  
+
   static async assignRole(req, res) {
-    // This is a placeholder for the assignRole function
-    res.send("Assign Role route");
+    try {
+      const { uid } = req.params;
+      const { role } = req.body;
+      const findUser = await prisma.user.findUnique({
+        where: { id: parseInt(uid) },
+      });
+      if (!findUser) {
+        return res.status(404).json({ errors: "User not found" });
+      }
+      const updatedUser = await prisma.user.update({
+        where: { id: parseInt(uid) },
+        data: {
+          role,
+        },
+      });
+      const { password: pass, ...rest } = updatedUser;
+      return res.status(201).json(rest);
+    } catch (error) {
+      return res.status(500).json({ errors: error.message });
+    }
   }
 }
