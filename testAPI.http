@@ -1,0 +1,9 @@
+@hostname = http://localhost:5000
+
+POST {{hostname}}/auth/login
+Content-Type: application/json
+
+{
+    "email":"admin@admin.com",
+    "pssword":"admin"
+}

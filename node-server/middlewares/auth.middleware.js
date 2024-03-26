@@ -1,21 +1,28 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import prisma from "../db/db.config.js";
 
 dotenv.config();
 
 export const authMiddleware = (req, res, next) => {
-  const token = req.cookies.token;
-
-  if (!token) {
+  const token = req.cookies["token"];
+  console.log(token);
+  if (token === null || token === undefined) {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
     if (err) {
       return res.status(401).json({ message: "Unauthorized" });
     }
-
-    req.user = user;
+    console.log(user);
+    const findUser = await prisma.user.findUnique({ where: { id: user.id } });
+    if (!findUser) {
+      return res.status(401).json({ message: "Unauthorized" });
+    } else if (findUser.role === "UNASSIGNED") {
+      return res.status(401).json({ message: "No role assigned" });
+    }
+    req.user = findUser;
     next();
   });
 };

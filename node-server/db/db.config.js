@@ -1,4 +1,5 @@
 import { PrismaClient, Role } from "@prisma/client";
+import bcrypt from "bcryptjs/dist/bcrypt.js";
 
 const prisma = new PrismaClient({
   log: ["query", "error"],
@@ -12,11 +13,12 @@ async function main() {
   if (findUser) {
     return;
   }
+  const salt = bcrypt.genSaltSync(3);
   await prisma.user.create({
     data: {
       name: "Admin",
       email: "admin@admin.com",
-      password: "admin",
+      password: bcrypt.hashSync("admin", salt),
       role: Role.SYSTEM_ADMIN,
     },
   });

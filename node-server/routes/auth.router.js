@@ -4,10 +4,12 @@ import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const authRouter = Router();
 
-authRouter.post("/login", authMiddleware, authController.login);
-authRouter.post("/logout", authMiddleware, authController.logout);
-authRouter.post("/reset-password/initiate", authMiddleware, authController.resetPasswordInitiate);
-authRouter.post("/reset-password/confirm", authMiddleware, authController.resetPasswordConfirm);
+authRouter.post("/login", authController.login);
+authRouter.get("/logout", authMiddleware, authController.logout);
+// TODO: Add the reset password routes
+authRouter.post("/reset-password/initiate", authController.resetPasswordInitiate);
+// TODO: Add the reset password confirm route
+authRouter.post("/reset-password/confirm", authController.resetPasswordConfirm);
 authRouter.put("/change-password", authMiddleware, authController.changePassword);
 
 export default authRouter;
