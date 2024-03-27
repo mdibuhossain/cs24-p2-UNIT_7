@@ -1,6 +1,17 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const CreateUser = () => {
+  const [rolesList, setRoleList] = useState([])
+
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/roles`, { withCredentials: true }).then(res => {
+      if (res.status === 200) {
+        setRoleList(res.data)
+      }
+    })
+  }, [])
+
   return (
     <div className="">
       <h2 className="mb-6 text-center text-3xl font-bold text-gray-900">
@@ -24,7 +35,7 @@ const CreateUser = () => {
               type="email"
               autoComplete="email"
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Email address"
+              placeholder="Email"
             />
           </div>
           <div>
@@ -32,22 +43,23 @@ const CreateUser = () => {
               id="password"
               name="password"
               type="password"
-              autoComplete="current-password"
-              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Password"
             />
           </div>
-        </div>
-        <div>
-          <select
-            id="role"
-            name="role"
-            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          >
-            <option value="">Select Role</option>
-            <option value="admin">Admin</option>
-            <option value="user">User</option>
-          </select>
+          <div>
+            <select
+              id="role"
+              name="role"
+              className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md rounded-t-none  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            >
+              {
+                rolesList.map((roleItem) => (
+                  <option key={roleItem.id} value={roleItem.title}>{roleItem.title}</option>
+                ))
+              }
+            </select>
+          </div>
         </div>
 
         <div>
