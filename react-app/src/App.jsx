@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/dashboard/Dashboard";
 import Login from "./pages/Login";
 import Home from "./pages/dashboard/Home";
 import AllUsers from "./pages/dashboard/AllUsers";
@@ -10,6 +9,7 @@ import Profile from "./pages/dashboard/Profile";
 import { AuthProvider } from "./contexts/auth.context";
 import RequireAuth from "./routes/PrivateRoute";
 import UpdateUser from "./pages/dashboard/UpdateUser";
+import DashboardNav from "./pages/dashboard/DashboardNav";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
             path="/"
             element={
               <RequireAuth>
-                <Dashboard />
+                <DashboardNav />
               </RequireAuth>
             }
           >

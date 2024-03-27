@@ -11,7 +11,7 @@ const ADMIN_NAVs = [
   { name: "Profile", path: "/profile" },
 ];
 
-const Dashboard = () => {
+const DashboardNav = () => {
   const { logout } = useContext(AuthContext);
   return (
     <div>
@@ -59,4 +59,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardNav;

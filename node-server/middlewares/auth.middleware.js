@@ -6,7 +6,6 @@ dotenv.config();
 
 export const authMiddleware = (req, res, next) => {
   const token = req.cookies["token"];
-  console.log(token);
   if (token === null || token === undefined) {
     return res.status(401).json({ message: "Unauthorized" });
   }
@@ -15,7 +14,6 @@ export const authMiddleware = (req, res, next) => {
     if (err) {
       return res.status(401).json({ message: "Unauthorized" });
     }
-    console.log(user);
     const findUser = await prisma.user.findUnique({ where: { id: user.id } });
     if (!findUser) {
       return res.status(401).json({ message: "Unauthorized" });
