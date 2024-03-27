@@ -5,6 +5,7 @@ import { AuthContext } from "../contexts/auth.context";
 const RequireAuth = ({ children }) => {
   const { user, isLoading } = useContext(AuthContext);
   const location = useLocation();
+  console.log(location)
   if (isLoading) return <p>Loading...</p>;
   if (!(user?.email || user?.displayName))
     return <Navigate to="/login" state={{ from: location }} />;
