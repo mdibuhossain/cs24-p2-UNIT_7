@@ -9,6 +9,7 @@ import AssignRole from "./pages/dashboard/AssignRole";
 import Profile from "./pages/dashboard/Profile";
 import { AuthProvider } from "./contexts/auth.context";
 import RequireAuth from "./routes/PrivateRoute";
+import UpdateUser from "./pages/dashboard/UpdateUser";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/users" element={<AllUsers />} />
             <Route path="/roles" element={<AllRoles />} />
             <Route path="/create-user" element={<CreateUser />} />
+            <Route path="/update-user/:uid" element={<UpdateUser />} />
             <Route path="/assign-role" element={<AssignRole />} />
             <Route path="/profile" element={<Profile />} />
           </Route>

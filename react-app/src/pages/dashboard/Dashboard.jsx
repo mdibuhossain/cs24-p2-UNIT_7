@@ -3,7 +3,7 @@ import { Outlet, NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth.context";
 
 const ADMIN_NAVs = [
-  { name: "Home", path: "/" },
+  { name: "Dashboard", path: "/" },
   { name: "Show Users", path: "/users" },
   { name: "Available Roles", path: "/roles" },
   { name: "Assign Role", path: "/assign-role" },
