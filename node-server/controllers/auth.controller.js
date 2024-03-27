@@ -24,7 +24,6 @@ export class authController {
           });
           res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
             maxAge: 1000 * 60 * 60 * 24 * 7,
           });
           return res.status(200).json({ message: "Login successful" });
