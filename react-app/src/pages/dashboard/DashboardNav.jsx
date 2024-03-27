@@ -8,11 +8,29 @@ const ADMIN_NAVs = [
   { name: "Available Roles", path: "/roles" },
   { name: "Assign Role", path: "/assign-role" },
   { name: "Create User", path: "/create-user" },
-  { name: "Profile", path: "/profile" },
 ];
 
+const COMMON_NAVs = [{ name: "Profile", path: "/profile" }];
+
+const NavListView = (NavList) => {
+  return NavList.map((nav) => (
+    <NavLink
+      key={nav.path}
+      // className="p-1 ps-2 hover:bg-gray-400 rounded-md overflow-hidden"
+      className={({ isActive }) =>
+        isActive
+          ? "p-1 ps-2 hover:bg-gray-400 rounded-md overflow-hidden bg-gray-400"
+          : "p-1 ps-2 hover:bg-gray-400 rounded-md overflow-hidden"
+      }
+      to={nav.path}
+    >
+      {nav.name}
+    </NavLink>
+  ));
+};
+
 const DashboardNav = () => {
-  const { logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   return (
     <div>
       <div className="flex flex-row w-full">
@@ -24,23 +42,8 @@ const DashboardNav = () => {
               EcoSync
             </div>
             <div className="flex flex-col gap-y-2 font-light text-white">
-              {
-                // Show admin navs only if user is admin
-                ADMIN_NAVs.map((nav) => (
-                  <NavLink
-                    key={nav.path}
-                    // className="p-1 ps-2 hover:bg-gray-400 rounded-md overflow-hidden"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "p-1 ps-2 hover:bg-gray-400 rounded-md overflow-hidden bg-gray-400"
-                        : "p-1 ps-2 hover:bg-gray-400 rounded-md overflow-hidden"
-                    }
-                    to={nav.path}
-                  >
-                    {nav.name}
-                  </NavLink>
-                ))
-              }
+              {user?.role === "SYSTEM_ADMIN" ? NavListView(ADMIN_NAVs) : null}
+              {NavListView(COMMON_NAVs)}
             </div>
             <button
               onClick={logout}

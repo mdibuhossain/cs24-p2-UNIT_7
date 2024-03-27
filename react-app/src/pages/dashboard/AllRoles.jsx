@@ -19,12 +19,10 @@ const AllRoles = () => {
 
   return (
     <div>
+      <h2 className="mb-6 text-center text-3xl font-bold text-gray-900">
+        Available Roles
+      </h2>
       <table className="border-separate w-full border-spacing-y-2 text-sm">
-        <thead className="text-left">
-          <tr>
-            <th className="ps-4">Roles</th>
-          </tr>
-        </thead>
         <tbody>
           {rolesList.map((role) => (
             <tr key={role.id}>
