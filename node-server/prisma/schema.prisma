@@ -9,18 +9,77 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String?  @db.VarChar(200)
-  email     String   @unique @db.VarChar(200)
-  password  String
-  photo     String?
-  createdAt DateTime @default(now())
-  role      RoleType @default(UNASSIGNED)
+  id         Int       @id @default(autoincrement())
+  name       String?   @db.VarChar(200)
+  email      String    @unique @db.VarChar(200)
+  password   String
+  photo      String?
+  createdAt  DateTime  @default(now())
+  role       RoleType  @default(UNASSIGNED)
+  Sts        Sts?      @relation(fields: [stsId], references: [id])
+  stsId      Int?
+  Landfill   Landfill? @relation(fields: [landfillId], references: [id])
+  landfillId Int?
 }
 
 model Role {
   id    Int      @id @default(autoincrement())
   title RoleType @unique @default(UNASSIGNED)
+}
+
+model Vehicle {
+  id                 Int                  @id @default(autoincrement())
+  type               String
+  reg_no             Int                  @unique
+  capacity           Int
+  loaded_cost        Int
+  unloaded_cost      Int
+  sts_vehicle_record sts_vehicle_record[]
+  dump_records       dump_record[]
+}
+
+model Sts {
+  id                 Int                  @id @default(autoincrement())
+  ward               Int                  @unique
+  capacity           Int
+  latitude           Float
+  longitude          Float
+  managers           User[]
+  sts_vehicle_record sts_vehicle_record[]
+  dump_records       dump_record[]
+}
+
+model Landfill {
+  id           Int           @id @default(autoincrement())
+  capacity     Int
+  latitude     Float
+  longitude    Float
+  manager      User[]
+  dump_records dump_record[]
+}
+
+model sts_vehicle_record {
+  id             Int      @id @default(autoincrement())
+  waste          Int
+  arrival_time   DateTime
+  departure_time DateTime
+  Sts            Sts?     @relation(fields: [stsId], references: [id])
+  stsId          Int?
+  Vehicle        Vehicle? @relation(fields: [reg_no], references: [reg_no])
+  reg_no         Int?
+}
+
+model dump_record {
+  id             Int       @id @default(autoincrement())
+  weight         Int
+  arrival_time   DateTime
+  departure_time DateTime
+  Landfill       Landfill? @relation(fields: [landfillId], references: [id])
+  landfillId     Int?
+  Vehicle        Vehicle?  @relation(fields: [vehicleId], references: [id])
+  vehicleId      Int?
+  Sts            Sts?      @relation(fields: [stsId], references: [id])
+  stsId          Int?
 }
 
 enum RoleType {
