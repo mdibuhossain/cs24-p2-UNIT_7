@@ -1,9 +1,8 @@
 version: '3'
 
 services:
-  db:
+  postgresDB:
     image: postgres:latest
-    container_name: postgresDB
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -14,9 +13,11 @@ services:
   backend:
     build: ./node-server
     container_name: backend_c
-    command: sh -c "npx prisma migrate deploy --preview-feature && npm start"
+    # command: sh -c "npx prisma migrate deploy --preview-feature && npm start"
+    links:
+      - postgresDB
     depends_on:
-      - db
+      - postgresDB
     ports:
       - '5000:5000'
   frontend:
