@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -7,10 +7,10 @@ const useAuth = () => {
   const location = useLocation();
   const history = useNavigate();
 
-  const redirect = () => {
+  const redirect = useCallback(() => {
     const { state } = location;
     state?.from ? history(state?.from?.pathname) : history("/");
-  };
+  }, [history, location]);
 
   const login = (payload) => {
     axios
@@ -23,7 +23,7 @@ const useAuth = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.response.data.errors);
       });
   };
 

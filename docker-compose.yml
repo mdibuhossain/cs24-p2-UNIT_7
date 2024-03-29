@@ -14,6 +14,8 @@ services:
     build: ./node-server
     container_name: backend_c
     # command: sh -c "npx prisma migrate deploy --preview-feature && npm start"
+    environment:
+      - DATABASE_URL=postgresql://postgres:root@postgresDB:5432/dncc?schema=public
     links:
       - postgresDB
     depends_on:
