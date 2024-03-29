@@ -33,7 +33,8 @@ const AssignRole = () => {
   }, []);
 
   const handleAssignRole = (id) => {
-    const role = document.getElementById("role").value;
+    const role = document.getElementById(`role-${id}`).value;
+    console.log(role);
     if (window.confirm("Are you sure you want to assign this role?")) {
       axios
         .put(
@@ -44,6 +45,7 @@ const AssignRole = () => {
           }
         )
         .then((res) => {
+          console.log(res);
           if (res.status === 201) {
             alert("Role assigned successfully");
           }
@@ -75,7 +77,7 @@ const AssignRole = () => {
                       <td className="td-class">{user?.email}</td>
                       <td className="td-class">
                         <select
-                          id="role"
+                          id={`role-${user?.id}`}
                           name="role"
                           defaultValue={user?.role}
                           className="appearance-none relative block px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
