@@ -32,7 +32,7 @@ const LandfillManager = () => {
   }, []);
 
   const handleAssignLandfill = (uid) => {
-    const lid = document.getElementById("role").value;
+    const lid = document.getElementById(`role-${uid}`).value;
     if (window.confirm("Are you sure you want to assign this role?")) {
       axios
         .put(
@@ -63,7 +63,7 @@ const LandfillManager = () => {
             <tr>
               <th className="ps-4">Name</th>
               <th className="ps-4">Email</th>
-              <th className="ps-4">STS</th>
+              <th className="ps-4">Landfill</th>
               <th className="ps-4">Action</th>
             </tr>
           </thead>
@@ -76,7 +76,7 @@ const LandfillManager = () => {
                     <td className="td-class">{user?.email}</td>
                     <td className="td-class">
                       <select
-                        id="role"
+                        id={`role-${user?.id}`}
                         name="role"
                         defaultValue={user?.Landfill?.id || -1}
                         className="appearance-none relative block px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -87,7 +87,7 @@ const LandfillManager = () => {
                         <option value={-1}>UNASSIGNED</option>
                         {landfillList.map((landItem) => (
                           <option key={landItem.id} value={landItem.id}>
-                            Ward number {landItem.ward}
+                            Landfill {landItem.id}
                           </option>
                         ))}
                       </select>

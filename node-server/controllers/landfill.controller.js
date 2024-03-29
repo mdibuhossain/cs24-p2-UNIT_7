@@ -35,18 +35,21 @@ export class landfillController {
   }
   static async assignManager(req, res) {
     try {
-      const { lid, uid } = req.params;
+      const { uid, lid } = req.body;
       const findUser = await prisma.user.findUnique({
         where: { id: Number(uid) },
-        include: { Landfill: true, Sts: true }
+        include: { Landfill: true, Sts: true },
       });
       if (!findUser) {
         return res.status(404).json({ message: "User not found" });
       }
       const updateUser = await prisma.user.update({
-        where: { id: Number(lid) },
-        data: { landfillId: Number(lid) },
+        where: { id: Number(uid) },
+        data: { landfillId: Number(lid) > -1 ? Number(lid) : null },
       });
+      if (Number(lid) === -1) {
+        return res.status(201).json({ message: "Successfully unassigned." });
+      }
       return res.status(201).json({ message: "Successfully assigned." });
     } catch (error) {
       return res.status(500).json({ errors: error.message });

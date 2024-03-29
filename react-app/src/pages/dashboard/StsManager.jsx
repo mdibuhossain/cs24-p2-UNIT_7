@@ -32,7 +32,7 @@ const StsManager = () => {
   }, []);
 
   const handleAssignSTS = (uid) => {
-    const sid = document.getElementById("role").value;
+    const sid = document.getElementById(`role-${uid}`).value;
     if (window.confirm("Are you sure you want to assign this role?")) {
       axios
         .put(
@@ -76,7 +76,7 @@ const StsManager = () => {
                     <td className="td-class">{user?.email}</td>
                     <td className="td-class">
                       <select
-                        id="role"
+                        id={`role-${user?.id}`}
                         name="role"
                         defaultValue={user?.Sts?.id || -1}
                         className="appearance-none relative block px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
