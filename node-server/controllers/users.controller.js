@@ -12,6 +12,7 @@ export class usersController {
           photo: true,
           role: true,
           createdAt: true,
+          Landfill: true, Sts: true
         },
       });
       return res.status(200).json(users);
@@ -24,6 +25,7 @@ export class usersController {
       const { uid } = req.params;
       const findUser = await prisma.user.findUnique({
         where: { id: parseInt(uid) },
+        include: { Landfill: true, Sts: true }
       });
       if (!findUser) {
         return res.status(404).json({ errors: "User not found" });
@@ -60,6 +62,7 @@ export class usersController {
       if (currentUser.role === "SYSTEM_ADMIN") {
         const findUser = await prisma.user.findUnique({
           where: { id: parseInt(uid) },
+          include: { Landfill: true, Sts: true }
         });
         if (!findUser) {
           return res.status(404).json({ errors: "User not found" });
@@ -96,6 +99,7 @@ export class usersController {
       const { uid } = req.params;
       const findUser = await prisma.user.findUnique({
         where: { id: parseInt(uid) },
+        include: { Landfill: true, Sts: true }
       });
       if (!findUser) {
         return res.status(404).json({ errors: "User not found" });
@@ -122,6 +126,7 @@ export class usersController {
       const { role } = req.body;
       const findUser = await prisma.user.findUnique({
         where: { id: parseInt(uid) },
+        include: { Landfill: true, Sts: true }
       });
       if (!findUser) {
         return res.status(404).json({ errors: "User not found" });

@@ -9,6 +9,7 @@ export class authController {
       const { email, password } = req.body;
       const findUser = await prisma.user.findUnique({
         where: { email },
+        include: { Landfill: true, Sts: true }
       });
       if (!findUser) {
         return res.status(400).json({ errors: "Invalid credentials" });

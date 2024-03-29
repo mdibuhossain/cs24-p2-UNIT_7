@@ -37,9 +37,8 @@ export class landfillController {
     try {
       const { lid, uid } = req.params;
       const findUser = await prisma.user.findUnique({
-        where: {
-          id: Number(uid),
-        },
+        where: { id: Number(uid) },
+        include: { Landfill: true, Sts: true }
       });
       if (!findUser) {
         return res.status(404).json({ message: "User not found" });
