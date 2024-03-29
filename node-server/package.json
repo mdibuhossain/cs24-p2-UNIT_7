@@ -5,7 +5,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "generate:prisma": "npx prisma migrate deploy --preview-feature",
+    "generate:prisma": "npx prisma migrate dev --name init",
     "start:prod": "npm run generate:prisma && npm run dev",
     "start": "node server.js",
     "dev": "nodemon server.js",

@@ -23,6 +23,7 @@ export class vehicleController {
   static async createVehicle(req, res) {
     try {
       const payload = req.body;
+      console.log(payload)
       const createVehicle = await prisma.vehicle.create({
         data: payload,
       });

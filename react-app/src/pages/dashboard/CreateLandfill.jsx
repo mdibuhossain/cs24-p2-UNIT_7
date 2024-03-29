@@ -18,7 +18,7 @@ const CreateLandfill = () => {
           if (res.status === 201) {
             alert("Landfill created successfully");
           }
-        });
+        }).catch(error => alert(error.response.data.errors))
     } catch (error) {
       console.log(error);
     }

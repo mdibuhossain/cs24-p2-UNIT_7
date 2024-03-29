@@ -5,7 +5,7 @@ const CreateSts = () => {
     e.preventDefault();
     const data = new FormData(e.target);
     const payload = {
-      ward: data.get("ward"),
+      ward: Number(data.get("ward")),
       capacity: Number(data.get("capacity")),
       latitude: Number(data.get("latitude")),
       longitude: Number(data.get("longitude")),
@@ -19,7 +19,7 @@ const CreateSts = () => {
           if (res.status === 201) {
             alert("STS created successfully");
           }
-        });
+        }).catch(error => alert(error.response.data.errors))
     } catch (error) {
       console.log(error);
     }

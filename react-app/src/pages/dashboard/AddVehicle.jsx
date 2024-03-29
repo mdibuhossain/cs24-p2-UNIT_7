@@ -7,11 +7,11 @@ const AddVehicle = () => {
     e.preventDefault();
     const data = new FormData(e.target);
     const payload = {
-      reg_no: data.get("reg_no"),
+      reg_no: Number(data.get("reg_no")),
       type: e.target.type.options[e.target.type.selectedIndex].text,
       capacity: Number(capacity),
-      loaded_cost: data.get("loaded_cost"),
-      unloaded_cost: data.get("unloaded_cost"),
+      loaded_cost: Number(data.get("loaded_cost")),
+      unloaded_cost: Number(data.get("unloaded_cost")),
     };
     try {
       axios
@@ -22,7 +22,7 @@ const AddVehicle = () => {
           if (res.status === 201) {
             alert("Vehicle added successfully");
           }
-        });
+        }).catch((error) => alert(error.response.data.errors))
     } catch (error) {
       console.log(error);
     }
@@ -113,7 +113,7 @@ const AddVehicle = () => {
           <input
             className="shadow-md shadow-gray-300 appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="vehicleUnloadedCost"
-            type="text"
+            type="number"
             placeholder="Fuel cost per kilometer"
             name="unloaded_cost"
             required
