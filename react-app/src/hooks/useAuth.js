@@ -6,7 +6,7 @@ const useAuth = () => {
   const [user, setUser] = React.useState(null);
   const location = useLocation();
   const history = useNavigate();
-  console.log(user)
+
   const redirect = useCallback(() => {
     const { state } = location;
     state?.from ? history(state?.from?.pathname) : history("/");

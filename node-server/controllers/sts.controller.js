@@ -44,9 +44,12 @@ export class stsController {
         return res.status(404).json({ message: "User not found" });
       }
       const updateUser = await prisma.user.update({
-        where: { id: Number(sid) },
-        data: { stsId: Number(uid) },
+        where: { id: Number(uid) },
+        data: { stsId: Number(sid) > -1 ? Number(sid) : null },
       });
+      if (Number(sid) === -1) {
+        return res.status(201).json({ message: "Successfully unassigned." });
+      }
       return res.status(201).json({ message: "Successfully assigned." });
     } catch (error) {
       return res.status(500).json({ errors: error.message });

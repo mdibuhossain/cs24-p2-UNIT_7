@@ -4,10 +4,10 @@ export const ADMIN_NAVs = [
   { name: "Available Roles", path: "/roles" },
   { name: "Assign Role", path: "/assign-role" },
   { name: "Create User", path: "/create-user" },
+  { name: "STS managers", path: "/sts-manager" },
+  { name: "Landfill managers", path: "/landfill-manager" },
   { name: "Create STS", path: "/create-sts" },
-  // { name: "STS managers", path: "/sts-manager" },
   { name: "Create Landfill", path: "/create-landfill" },
-  // { name: "Landfill managers", path: "/landfill-manager" },
   { name: "Add Vehicle", path: "/add-vehicle" },
 ];
 
