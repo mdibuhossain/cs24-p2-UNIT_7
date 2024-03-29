@@ -9,9 +9,9 @@ const ADMIN_NAVs = [
   { name: "Assign Role", path: "/assign-role" },
   { name: "Create User", path: "/create-user" },
   { name: "Create STS", path: "/create-sts" },
-  { name: "STS manager", path: "/sts-manager" },
+  { name: "STS managers", path: "/sts-manager" },
   { name: "Create Landfill", path: "/create-landfill" },
-  { name: "Landfill manager", path: "/landfill-manager" },
+  { name: "Landfill managers", path: "/landfill-manager" },
   { name: "Add Vehicle", path: "/add-vehicle" },
 ];
 
@@ -55,7 +55,9 @@ const DashboardNav = () => {
             <div className="flex flex-col gap-y-2 font-light text-white overflow-auto">
               {user?.role === "SYSTEM_ADMIN" ? NavListView(ADMIN_NAVs) : null}
               {user?.role === "STS_MANAGER" ? NavListView(STS_NAVs) : null}
-              {user?.role === "LANDFILL_MANAGER" ? NavListView(LANDFILL_NAVs) : null}
+              {user?.role === "LANDFILL_MANAGER"
+                ? NavListView(LANDFILL_NAVs)
+                : null}
               {NavListView(COMMON_NAVs)}
             </div>
             <button

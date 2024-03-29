@@ -10,6 +10,13 @@ import { AuthProvider } from "./contexts/auth.context";
 import RequireAuth from "./routes/PrivateRoute";
 import UpdateUser from "./pages/dashboard/UpdateUser";
 import DashboardNav from "./pages/dashboard/DashboardNav";
+import CreateSts from "./pages/dashboard/CreateSts";
+import CreateLandfill from "./pages/dashboard/CreateLandfill";
+import StsManager from "./pages/dashboard/StsManager";
+import LandfillManager from "./pages/dashboard/LandfillManager";
+import AddVehicle from "./pages/dashboard/AddVehicle";
+import EntryStsVehicle from "./pages/dashboard/EntryStsVehicle";
+import EntryDump from "./pages/dashboard/EntryDump";
 
 function App() {
   return (
@@ -30,6 +37,13 @@ function App() {
             <Route path="/create-user" element={<CreateUser />} />
             <Route path="/update-user/:uid" element={<UpdateUser />} />
             <Route path="/assign-role" element={<AssignRole />} />
+            <Route path="/create-sts" element={<CreateSts />} />
+            <Route path="/create-landfill" element={<CreateLandfill />} />
+            <Route path="/sts-manager" element={<StsManager />} />
+            <Route path="/landfill-manager" element={<LandfillManager />} />
+            <Route path="/add-vehicle" element={<AddVehicle />} />
+            <Route path="/sts-vehicle-entry" element={<EntryStsVehicle />} />
+            <Route path="/landfill-vehicle-entry" element={<EntryDump />} />
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/login" element={<Login />} />
