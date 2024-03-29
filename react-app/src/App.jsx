@@ -17,6 +17,8 @@ import LandfillManager from "./pages/dashboard/LandfillManager";
 import AddVehicle from "./pages/dashboard/AddVehicle";
 import EntryStsVehicle from "./pages/dashboard/EntryStsVehicle";
 import EntryDump from "./pages/dashboard/EntryDump";
+import AdminRoute from "./routes/AdminRoute";
+import StsRoute from "./routes/StsRoute";
 
 function App() {
   return (
@@ -31,19 +33,25 @@ function App() {
               </RequireAuth>
             }
           >
-            <Route path="/" element={<Home />} />
-            <Route path="/users" element={<AllUsers />} />
-            <Route path="/roles" element={<AllRoles />} />
-            <Route path="/create-user" element={<CreateUser />} />
-            <Route path="/update-user/:uid" element={<UpdateUser />} />
-            <Route path="/assign-role" element={<AssignRole />} />
-            <Route path="/create-sts" element={<CreateSts />} />
-            <Route path="/create-landfill" element={<CreateLandfill />} />
-            <Route path="/sts-manager" element={<StsManager />} />
-            <Route path="/landfill-manager" element={<LandfillManager />} />
-            <Route path="/add-vehicle" element={<AddVehicle />} />
-            <Route path="/sts-vehicle-entry" element={<EntryStsVehicle />} />
-            <Route path="/landfill-vehicle-entry" element={<EntryDump />} />
+            <Route element={<AdminRoute />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/users" element={<AllUsers />} />
+              <Route path="/roles" element={<AllRoles />} />
+              <Route path="/create-user" element={<CreateUser />} />
+              <Route path="/update-user/:uid" element={<UpdateUser />} />
+              <Route path="/assign-role" element={<AssignRole />} />
+              <Route path="/create-sts" element={<CreateSts />} />
+              <Route path="/create-landfill" element={<CreateLandfill />} />
+              <Route path="/sts-manager" element={<StsManager />} />
+              <Route path="/landfill-manager" element={<LandfillManager />} />
+              <Route path="/add-vehicle" element={<AddVehicle />} />
+            </Route>
+            <Route element={<StsRoute />}>
+              <Route path="/sts-vehicle-entry" element={<EntryStsVehicle />} />
+            </Route>
+            <Route element={<LandfillManager />}>
+              <Route path="/landfill-vehicle-entry" element={<EntryDump />} />
+            </Route>
             <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path="/login" element={<Login />} />
