@@ -23,7 +23,7 @@ export class vehicleController {
   static async createVehicle(req, res) {
     try {
       const payload = req.body;
-      console.log(payload)
+      console.log(payload);
       const createVehicle = await prisma.vehicle.create({
         data: payload,
       });
@@ -32,10 +32,20 @@ export class vehicleController {
       return res.status(500).json({ errors: error.message });
     }
   }
+  static async getStsRecords(req, res) {
+    try {
+      const findStsRecords = await prisma.sts_vehicle_record.findMany({
+        include: { Vehicle: true, Sts: true },
+      });
+      return res.status(200).json(findStsRecords);
+    } catch (error) {
+      return res.status(500).json({ errors: error.message });
+    }
+  }
   static async createStsRecord(req, res) {
     try {
       const payload = req.body;
-      const createStsRecord = await prisma.stsRecord.create({
+      const createStsRecord = await prisma.sts_vehicle_record.create({
         data: payload,
       });
       return res.status(201).json(createStsRecord);
