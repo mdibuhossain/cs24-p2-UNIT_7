@@ -36,7 +36,7 @@ const Profile = () => {
         </p>
         <p className="text-center text-base font-normal">{user.email}</p>
         <p className="text-center">
-          Role: <span className="bg-gray-300 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">
+          <span className="bg-indigo-300 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded">
             {user?.role}
           </span>
         </p>

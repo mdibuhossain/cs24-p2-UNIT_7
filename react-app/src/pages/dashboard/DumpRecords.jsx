@@ -31,9 +31,9 @@ const DumpRecords = () => {
           <tr>
             <th className="ps-4">ID</th>
             <th className="ps-4">Landfill ID</th>
-            <th className="ps-4">Vehicle reg.</th>
             <th className="ps-4">From STS (ward)</th>
-            <th className="ps-4">Waste (tons)</th>
+            <th className="ps-4">Vehicle reg.</th>
+            <th className="ps-4">Weight of waste (tons)</th>
             <th className="ps-4">Arrival time</th>
             <th className="ps-4">Departure time</th>
           </tr>
@@ -43,9 +43,9 @@ const DumpRecords = () => {
             <tr key={rec?.id}>
               <td className="border px-4 py-2">{rec?.id}</td>
               <td className="border px-4 py-2">{rec?.Landfill?.id}</td>
-              <td className="border px-4 py-2">{rec?.Vehicle?.reg_no}</td>
               <td className="border px-4 py-2">{rec?.Sts?.ward}</td>
-              <td className="border px-4 py-2">{rec?.waste}</td>
+              <td className="border px-4 py-2">{rec?.Vehicle?.reg_no}</td>
+              <td className="border px-4 py-2">{rec?.weight}</td>
               <td className="border px-4 py-2">
                 {new Date(rec?.arrival_time).toLocaleString()}
               </td>
