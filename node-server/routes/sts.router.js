@@ -7,7 +7,6 @@ const stsRouter = Router();
 
 stsRouter.get("/", authMiddleware, stsController.getAllSts);
 stsRouter.get("/:sid", authMiddleware, stsController.getSingleSts);
-stsRouter.get("/:sid", authMiddleware, stsController.getSingleSts);
 stsRouter.get("/managers", authMiddleware, stsController.getManagers);
 stsRouter.post("/", authMiddleware, stsController.createSts);
 stsRouter.put("/managers", authMiddleware, roleMiddleware.isAdmin, stsController.assignManager);

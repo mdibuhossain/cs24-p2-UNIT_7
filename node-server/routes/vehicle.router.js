@@ -7,7 +7,7 @@ const vehicleRouter = Router();
 vehicleRouter.get("/", authMiddleware, vehicleController.getVehicles);
 vehicleRouter.get("/sts-records", authMiddleware, vehicleController.getAllStsRecords);
 vehicleRouter.get("/sts/:sid/sts-records", authMiddleware, vehicleController.getSingleStsRecords);
-vehicleRouter.get("/:vid", authMiddleware, vehicleController.getVehicle);
+// vehicleRouter.get("/:vid", authMiddleware, vehicleController.getVehicle);
 vehicleRouter.post("/", authMiddleware, vehicleController.createVehicle);
 vehicleRouter.post("/sts-records", authMiddleware, vehicleController.createStsRecord);
 vehicleRouter.post("/dump-record", authMiddleware, vehicleController.createDumpRecord);
