@@ -32,9 +32,21 @@ export class vehicleController {
       return res.status(500).json({ errors: error.message });
     }
   }
-  static async getStsRecords(req, res) {
+  static async getAllStsRecords(req, res) {
     try {
       const findStsRecords = await prisma.sts_vehicle_record.findMany({
+        include: { Vehicle: true, Sts: true },
+      });
+      return res.status(200).json(findStsRecords);
+    } catch (error) {
+      return res.status(500).json({ errors: error.message });
+    }
+  }
+  static async getSingleStsRecords(req, res) {
+    try {
+      const { sid } = req.params;
+      const findStsRecords = await prisma.sts_vehicle_record.findMany({
+        where: { stsId: parseInt(sid) },
         include: { Vehicle: true, Sts: true },
       });
       return res.status(200).json(findStsRecords);

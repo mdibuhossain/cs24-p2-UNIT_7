@@ -5,7 +5,8 @@ import { vehicleController } from "../controllers/vehicle.controller.js";
 const vehicleRouter = Router();
 
 vehicleRouter.get("/", authMiddleware, vehicleController.getVehicles);
-vehicleRouter.get("/sts-records", authMiddleware, vehicleController.getStsRecords);
+vehicleRouter.get("/sts-records", authMiddleware, vehicleController.getAllStsRecords);
+vehicleRouter.get("/sts/:sid/sts-records", authMiddleware, vehicleController.getSingleStsRecords);
 vehicleRouter.get("/:vid", authMiddleware, vehicleController.getVehicle);
 vehicleRouter.post("/", authMiddleware, vehicleController.createVehicle);
 vehicleRouter.post("/sts-records", authMiddleware, vehicleController.createStsRecord);

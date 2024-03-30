@@ -13,6 +13,7 @@ export const ADMIN_NAVs = [
 
 export const STS_NAVs = [
   { name: "Leaving vehicle record entry", path: "/sts-vehicle-entry" },
+  { name: "Vehicle records", path: "/sts-vehicle-records" },
 ];
 
 export const LANDFILL_NAVs = [
