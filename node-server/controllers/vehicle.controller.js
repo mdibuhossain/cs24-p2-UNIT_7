@@ -68,10 +68,32 @@ export class vehicleController {
   static async createDumpRecord(req, res) {
     try {
       const payload = req.body;
-      const createDumpRecord = await prisma.dumpRecord.create({
+      const createDumpRecord = await prisma.dump_record.create({
         data: payload,
       });
       return res.status(201).json(createDumpRecord);
+    } catch (error) {
+      return res.status(500).json({ errors: error.message });
+    }
+  }
+  static async getAllDumpRecords(req, res) {
+    try {
+      const findDumpRecords = await prisma.dump_record.findMany({
+        include: { Vehicle: true, Landfill: true, Sts: true },
+      });
+      return res.status(200).json(findDumpRecords);
+    } catch (error) {
+      return res.status(500).json({ errors: error.message });
+    }
+  }
+  static async getSingleDumpRecords(req, res) {
+    try {
+      const { lid } = req.params;
+      const findDumpRecords = await prisma.dump_record.findMany({
+        where: { landfillId: parseInt(lid) },
+        include: { Vehicle: true, Landfill: true, Sts: true },
+      });
+      return res.status(200).json(findDumpRecords);
     } catch (error) {
       return res.status(500).json({ errors: error.message });
     }
