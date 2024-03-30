@@ -3,7 +3,8 @@ import axios from "axios";
 
 const Home = () => {
   const [data, setData] = useState([]);
-  useEffect(() => {
+
+  const fetchData = async () => {
     try {
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/dashboard/monitor`, {
@@ -18,8 +19,16 @@ const Home = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  useEffect(() => {
+    fetchData();
+    const dataFetchInterval = setInterval(() => {
+      fetchData();
+    }, 2000);
+    return () => clearInterval(dataFetchInterval);
   }, []);
-  console.log(data);
+
   return (
     <div>
       <div className="flex flex-wra gap-5">
@@ -46,6 +55,80 @@ const Home = () => {
           <p className="text-2xl font-medium text-white">
             {data?.overview?.total_dump_waste} tons
           </p>
+        </div>
+      </div>
+      <div>
+        <h3 className="text-2xl font-semibold mt-5">
+          Waste transferred from each STS
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <table className="table-auto w-full">
+            <thead>
+              <tr>
+                <th className="border border-slate-600 px-4 py-2 text-left">
+                  STS ward
+                </th>
+                <th className="border border-slate-600 px-4 py-2 text-left">
+                  Number of Vehicles
+                </th>
+                <th className="border border-slate-600 px-4 py-2 text-left">
+                  Total Waste Collected
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.eachStsVehicleRecord?.map((item, index) => (
+                <tr key={index}>
+                  <td className="border border-slate-400 px-4 py-2">
+                    {item.ward}
+                  </td>
+                  <td className="border border-slate-400 px-4 py-2">
+                    {item.totalVehicle}
+                  </td>
+                  <td className="border border-slate-400 px-4 py-2">
+                    {item.totalWaste} tons
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3 className="text-2xl font-semibold mt-5">
+          Waste dumped to each Landfill sites
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <table className="table-auto w-full">
+            <thead>
+              <tr>
+                <th className="border border-slate-600 px-4 py-2 text-left">
+                  Landfill ID
+                </th>
+                <th className="border border-slate-600 px-4 py-2 text-left">
+                  Number of Vehicles
+                </th>
+                <th className="border border-slate-600 px-4 py-2 text-left">
+                  Total Waste Dumped
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.eachLandfillDumpRecord?.map((item, index) => (
+                <tr key={index}>
+                  <td className="border border-slate-400 px-4 py-2">
+                    {item.id}
+                  </td>
+                  <td className="border border-slate-400 px-4 py-2">
+                    {item.totalVehicle}
+                  </td>
+                  <td className="border border-slate-400 px-4 py-2">
+                    {item.totalWaste} tons
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
