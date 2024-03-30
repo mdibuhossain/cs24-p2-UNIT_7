@@ -21,6 +21,7 @@ import AdminRoute from "./routes/AdminRoute";
 import StsRoute from "./routes/StsRoute";
 import LandfillRoute from "./routes/LandfillRoute";
 import StsVehicleRecords from "./pages/dashboard/StsVehicleRecords";
+import DumpRecords from "./pages/dashboard/DumpRecords";
 
 function App() {
   return (
@@ -50,13 +51,11 @@ function App() {
             </Route>
             <Route element={<StsRoute />}>
               <Route path="/sts-vehicle-entry" element={<EntryStsVehicle />} />
-              <Route
-                path="/sts-vehicle-records"
-                element={<StsVehicleRecords />}
-              />
+              <Route path="/sts-vehicle-records" element={<StsVehicleRecords />} />
             </Route>
             <Route element={<LandfillRoute />}>
               <Route path="/landfill-vehicle-entry" element={<EntryDump />} />
+              <Route path="/landfill-vehicle-records" element={<DumpRecords />} />
             </Route>
             <Route path="/profile" element={<Profile />} />
           </Route>

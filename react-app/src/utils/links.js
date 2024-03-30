@@ -18,6 +18,7 @@ export const STS_NAVs = [
 
 export const LANDFILL_NAVs = [
   { name: "Entry dump record", path: "/landfill-vehicle-entry" },
+  { name: "Dump records", path: "/landfill-vehicle-records" },
 ];
 
 export const COMMON_NAVs = [{ name: "Profile", path: "/profile" }];
