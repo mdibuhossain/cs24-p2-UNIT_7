@@ -123,7 +123,7 @@ const Home = () => {
                     {item.totalVehicle}
                   </td>
                   <td className="border border-slate-400 px-4 py-2">
-                    {item.totalWaste} tons
+                    {item.totalWeight} tons
                   </td>
                 </tr>
               ))}
