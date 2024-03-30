@@ -5,7 +5,7 @@ import { roleMiddleware } from "../middlewares/role.middleware.js";
 
 const dashboardRouter = Router();
 
-dashboardRouter.get("/total-waste-collection", authMiddleware, roleMiddleware.isAdmin, dashboardController.getTotalWasteCollection);
+dashboardRouter.get("/monitor", authMiddleware, roleMiddleware.isAdmin, dashboardController.getTotalWasteCollection);
 
 
 export default dashboardRouter;
