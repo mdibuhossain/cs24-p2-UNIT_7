@@ -2,19 +2,24 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const CreateUser = () => {
-  const [rolesList, setRoleList] = useState([]);
+  const [rolesList, setRoleList] = useState([
+    { id: 1, title: "SYSTEM_ADMIN" },
+    { id: 2, title: "STS_MANAGER", disabled: true },
+    { id: 3, title: "LANDFILL_MANAGER", disabled: true },
+    { id: 4, title: "UNASSIGNED" },
+  ]);
 
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/users/roles`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setRoleList(res.data);
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${import.meta.env.VITE_BACKEND_URL}/users/roles`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         setRoleList(res.data);
+  //       }
+  //     });
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +46,10 @@ const CreateUser = () => {
       <h2 className="mb-6 text-center text-3xl font-bold text-gray-900">
         Create new user
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-lg mx-auto space-y-6"
+      >
         <div className="rounded-md shadow-sm -space-y-px">
           <div>
             <input
@@ -81,7 +89,11 @@ const CreateUser = () => {
                 Assign Role
               </option>
               {rolesList.map((roleItem) => (
-                <option key={roleItem.id} value={roleItem.title}>
+                <option
+                  key={roleItem.id}
+                  value={roleItem.title}
+                  disabled={roleItem?.disabled}
+                >
                   {roleItem.title}
                 </option>
               ))}

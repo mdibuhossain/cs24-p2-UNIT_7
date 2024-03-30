@@ -11,7 +11,9 @@ export const ADMIN_NAVs = [
   { name: "Add Vehicle", path: "/add-vehicle" },
 ];
 
-export const STS_NAVs = [{ name: "Entry vehicle", path: "/sts-vehicle-entry" }];
+export const STS_NAVs = [
+  { name: "Leaving vehicle record entry", path: "/sts-vehicle-entry" },
+];
 
 export const LANDFILL_NAVs = [
   { name: "Entry dump record", path: "/landfill-vehicle-entry" },

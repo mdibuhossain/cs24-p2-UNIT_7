@@ -19,6 +19,7 @@ import EntryStsVehicle from "./pages/dashboard/EntryStsVehicle";
 import EntryDump from "./pages/dashboard/EntryDump";
 import AdminRoute from "./routes/AdminRoute";
 import StsRoute from "./routes/StsRoute";
+import LandfillRoute from "./routes/LandfillRoute";
 
 function App() {
   return (
@@ -49,7 +50,7 @@ function App() {
             <Route element={<StsRoute />}>
               <Route path="/sts-vehicle-entry" element={<EntryStsVehicle />} />
             </Route>
-            <Route element={<LandfillManager />}>
+            <Route element={<LandfillRoute />}>
               <Route path="/landfill-vehicle-entry" element={<EntryDump />} />
             </Route>
             <Route path="/profile" element={<Profile />} />

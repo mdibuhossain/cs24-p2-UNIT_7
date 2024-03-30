@@ -31,7 +31,7 @@ const DashboardNav = () => {
     <div>
       <div className="flex flex-row w-full">
         {/* Slidebar */}
-        <div className="flex w-[280px] h-screen">
+        <div className="flex w-[300px] h-screen">
           {/* slidebar innner floating bar */}
           <div className="p-3 m-3 w-full bg-[#1c2333] rounded-lg overflow-y-auto relative space-y-2">
             <div className="p-1 ps-2 text-white font-extrabold text-4xl mb-10">
