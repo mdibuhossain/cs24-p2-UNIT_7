@@ -45,7 +45,10 @@ export class stsController {
       }
       const updateUser = await prisma.user.update({
         where: { id: Number(uid) },
-        data: { stsId: Number(sid) > -1 ? Number(sid) : null },
+        data: {
+          stsId: Number(sid) > -1 ? Number(sid) : null,
+          role: Number(sid) > -1 ? "STS_MANAGER" : "UNASSIGNED",
+        },
       });
       if (Number(sid) === -1) {
         return res.status(201).json({ message: "Successfully unassigned." });

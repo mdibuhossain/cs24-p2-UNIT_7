@@ -45,7 +45,10 @@ export class landfillController {
       }
       const updateUser = await prisma.user.update({
         where: { id: Number(uid) },
-        data: { landfillId: Number(lid) > -1 ? Number(lid) : null },
+        data: {
+          landfillId: Number(lid) > -1 ? Number(lid) : null,
+          role: Number(lid) > -1 ? "LANDFILL_MANAGER" : "UNASSIGNED",
+        },
       });
       if (Number(lid) === -1) {
         return res.status(201).json({ message: "Successfully unassigned." });

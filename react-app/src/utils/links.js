@@ -1,8 +1,8 @@
 export const ADMIN_NAVs = [
   { name: "Dashboard", path: "/" },
   { name: "Show Users", path: "/users" },
-  { name: "Available Roles", path: "/roles" },
-  { name: "Assign Role", path: "/assign-role" },
+  // { name: "Available Roles", path: "/roles" },
+  // { name: "Assign Role", path: "/assign-role" },
   { name: "Create User", path: "/create-user" },
   { name: "STS managers", path: "/sts-manager" },
   { name: "Landfill managers", path: "/landfill-manager" },

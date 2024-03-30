@@ -5,19 +5,24 @@ import { useParams } from "react-router-dom";
 const UpdateUser = () => {
   const { uid } = useParams();
   const [oldUser, setOldUser] = useState({});
-  const [rolesList, setRoleList] = useState([]);
+  const [rolesList, setRoleList] = useState([
+    { id: 1, title: "SYSTEM_ADMIN" },
+    { id: 2, title: "STS_MANAGER", disabled: true },
+    { id: 3, title: "LANDFILL_MANAGER", disabled: true },
+    { id: 4, title: "UNASSIGNED" },
+  ]);
 
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/users/roles`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        if (res.status === 200) {
-          setRoleList(res.data);
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${import.meta.env.VITE_BACKEND_URL}/users/roles`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((res) => {
+  //       if (res.status === 200) {
+  //         setRoleList(res.data);
+  //       }
+  //     });
+  // }, []);
 
   useEffect(() => {
     axios
@@ -100,7 +105,11 @@ const UpdateUser = () => {
                   Assign Role
                 </option>
                 {rolesList.map((roleItem) => (
-                  <option key={roleItem.id} value={roleItem.title}>
+                  <option
+                    key={roleItem.id}
+                    value={roleItem.title}
+                    disabled={roleItem?.disabled}
+                  >
                     {roleItem.title}
                   </option>
                 ))}
