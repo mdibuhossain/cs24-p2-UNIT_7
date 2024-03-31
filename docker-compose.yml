@@ -4,6 +4,11 @@ services:
   postgresDB:
     image: postgres:latest
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
@@ -16,9 +21,10 @@ services:
     # command: sh -c "npx prisma migrate deploy --preview-feature && npm start"
     environment:
       - DATABASE_URL=postgresql://postgres:root@postgresDB:5432/dncc?schema=public
-    links:
-      - postgresDB
     depends_on:
+      postgresDB:
+        condition: service_healthy
+    links:
       - postgresDB
     ports:
       - '5000:5000'
