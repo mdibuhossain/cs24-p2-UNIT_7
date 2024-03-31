@@ -62,7 +62,13 @@ export class landfillController {
     try {
       const managers = await prisma.landfill.findMany({
         select: {
-          manager: true,
+          id: true,
+          manager: {
+            select: {
+              id: true,
+              email: true,
+            },
+          },
         },
       });
       return res.status(200).json(managers);

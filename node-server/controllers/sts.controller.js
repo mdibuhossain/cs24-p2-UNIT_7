@@ -62,7 +62,14 @@ export class stsController {
     try {
       const managers = await prisma.sts.findMany({
         select: {
-          manager: true,
+          id: true,
+          ward: true,
+          managers: {
+            select: {
+              id: true,
+              email: true,
+            },
+          },
         },
       });
       return res.status(200).json(managers);
