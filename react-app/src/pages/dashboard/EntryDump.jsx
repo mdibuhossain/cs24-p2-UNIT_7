@@ -14,6 +14,7 @@ const EntryDump = () => {
       })
       .then((res) => {
         if (res.status === 200) {
+          console.log(res)
           setStsList(res.data);
         }
       });

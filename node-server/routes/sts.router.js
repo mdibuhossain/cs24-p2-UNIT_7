@@ -5,7 +5,7 @@ import { roleMiddleware } from "../middlewares/role.middleware.js";
 
 const stsRouter = Router();
 
-stsRouter.get("/", authMiddleware, roleMiddleware.isAdmin, stsController.getAllSts);
+stsRouter.get("/", authMiddleware, stsController.getAllSts);
 stsRouter.get("/managers", authMiddleware, roleMiddleware.isAdmin, stsController.getManagers);
 stsRouter.get("/:sid", authMiddleware, stsController.getSingleSts);
 stsRouter.post("/", authMiddleware, stsController.createSts);
