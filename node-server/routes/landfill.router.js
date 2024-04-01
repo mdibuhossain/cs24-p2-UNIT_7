@@ -5,7 +5,7 @@ import { roleMiddleware } from "../middlewares/role.middleware.js";
 
 const landfillRouter = Router();
 
-landfillRouter.get("/", authMiddleware, roleMiddleware.isAdmin, landfillController.getAllLandfills);
+landfillRouter.get("/", authMiddleware, landfillController.getAllLandfills);
 landfillRouter.get("/managers", authMiddleware, roleMiddleware.isAdmin, landfillController.getManagers);
 landfillRouter.get("/:lid", authMiddleware, landfillController.getSingleLandfill);
 landfillRouter.post("/", authMiddleware, roleMiddleware.isAdmin, landfillController.createLandfill);

@@ -23,6 +23,8 @@ import LandfillRoute from "./routes/LandfillRoute";
 import StsVehicleRecords from "./pages/dashboard/StsVehicleRecords";
 import DumpRecords from "./pages/dashboard/DumpRecords";
 import SingleUser from "./pages/dashboard/SingleUser";
+import AllSts from "./pages/dashboard/AllSts";
+import AllLandfill from "./pages/dashboard/AllLandfill";
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
               <Route path="/create-user" element={<CreateUser />} />
               <Route path="/update-user/:uid" element={<UpdateUser />} />
               <Route path="/assign-role" element={<AssignRole />} />
+              <Route path="/all-sts" element={<AllSts />} />
+              <Route path="/all-landfill" element={<AllLandfill />} />
               <Route path="/create-sts" element={<CreateSts />} />
               <Route path="/create-landfill" element={<CreateLandfill />} />
               <Route path="/sts-manager" element={<StsManager />} />

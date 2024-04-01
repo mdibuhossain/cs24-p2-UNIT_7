@@ -6,6 +6,8 @@ export const ADMIN_NAVs = [
   { name: "Create User", path: "/create-user" },
   { name: "STS managers", path: "/sts-manager" },
   { name: "Landfill managers", path: "/landfill-manager" },
+  { name: "Available STS", path: "/all-sts" },
+  { name: "Available Landfill", path: "/all-landfill" },
   { name: "Create STS", path: "/create-sts" },
   { name: "Create Landfill", path: "/create-landfill" },
   { name: "Add Vehicle", path: "/add-vehicle" },
