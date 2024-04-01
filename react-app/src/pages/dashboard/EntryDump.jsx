@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../contexts/auth.context";
 
@@ -14,7 +14,7 @@ const EntryDump = () => {
       })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res)
+          console.log(res);
           setStsList(res.data);
         }
       });

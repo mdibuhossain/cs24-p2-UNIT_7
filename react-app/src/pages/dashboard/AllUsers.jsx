@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth.context";
 
 const AllUsers = () => {
@@ -54,7 +54,11 @@ const AllUsers = () => {
                 {user.name}
                 {currentUser?.email === user.email ? " (You)" : null}
               </td>
-              <td className="td-class">{user.email}</td>
+              <td className="td-class">
+                <NavLink to={`/users/${user.id}`} className="text-blue-600">
+                  {user.email}
+                </NavLink>
+              </td>
               <td className="td-class">{user.role}</td>
               <td className="td-class">
                 {currentUser?.email === user.email ? (

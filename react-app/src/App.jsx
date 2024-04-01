@@ -22,6 +22,7 @@ import StsRoute from "./routes/StsRoute";
 import LandfillRoute from "./routes/LandfillRoute";
 import StsVehicleRecords from "./pages/dashboard/StsVehicleRecords";
 import DumpRecords from "./pages/dashboard/DumpRecords";
+import SingleUser from "./pages/dashboard/SingleUser";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
             <Route element={<AdminRoute />}>
               <Route path="/" element={<Home />} />
               <Route path="/users" element={<AllUsers />} />
+              <Route path="/users/:uid" element={<SingleUser />} />
               <Route path="/roles" element={<AllRoles />} />
               <Route path="/create-user" element={<CreateUser />} />
               <Route path="/update-user/:uid" element={<UpdateUser />} />
