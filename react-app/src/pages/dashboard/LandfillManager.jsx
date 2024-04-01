@@ -98,12 +98,14 @@ const LandfillManager = () => {
                       )}
                     </td>
                     <td className="td-class">
-                      <button
-                        onClick={() => handleAssignLandfill(user?.id)}
-                        className="py-1 px-3 bg-green-500 hover:bg-green-400 text-xs rounded-full text-red-600 hover:text-red-900"
-                      >
-                        Assign
-                      </button>
+                      {user?.Sts ? null : (
+                        <button
+                          onClick={() => handleAssignLandfill(user?.id)}
+                          className="py-1 px-3 bg-green-500 hover:bg-green-400 text-xs rounded-full text-red-600 hover:text-red-900"
+                        >
+                          Assign
+                        </button>
+                      )}
                     </td>
                   </tr>
                 )
