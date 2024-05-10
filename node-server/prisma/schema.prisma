@@ -63,7 +63,7 @@ model Sts {
   capacity           Int
   latitude           Float
   longitude          Float
-  lastHour           DateTime?
+  lastHour           String?
   fine               Float?
   managers           User[]
   sts_vehicle_record sts_vehicle_record[]

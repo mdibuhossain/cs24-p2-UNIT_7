@@ -25,8 +25,15 @@ export class stsController {
   static async createSts(req, res) {
     try {
       const payload = req.body;
+      console.log(payload);
       const sts = await prisma.sts.create({
-        data: payload,
+        data: {
+          ward: payload.ward,
+          capacity: payload.capacity,
+          lastHour: payload.lastHour + ":00",
+          latitude: payload.latitude,
+          longitude: payload.longitude,
+        },
       });
       return res.status(201).json(sts);
     } catch (error) {
@@ -104,6 +111,68 @@ export class stsController {
         },
       });
       return res.status(201).json(newEntry);
+    } catch (error) {
+      return res.status(500).json({ errors: error.message });
+    }
+  }
+  static async generateBills(req, res) {
+    const payload = req.body;
+    try {
+      const findSts = await prisma.sts.findUnique({
+        where: {
+          id: payload.stsId,
+        },
+      });
+      const datePart = payload.date.toString().split(" ")[0];
+      const startingDateTime = datePart + " 00:00:00";
+      const endingDateTime = datePart + " " + findSts.lastHour;
+      console.log(startingDateTime, endingDateTime);
+      const weightReceived = await prisma.sts_receives.findMany({
+        where: {
+          stsId: payload.stsId,
+          contractorId: payload.contractorId,
+          arrival_time: {
+            gte: new Date(startingDateTime),
+            lte: new Date(endingDateTime),
+          },
+        },
+        select: {
+          waste: true,
+        },
+      });
+      const thirdParty = await prisma.contractor.findUnique({
+        where: {
+          id: payload.contractorId,
+        },
+      });
+      const totalWasteReceived =
+        weightReceived.reduce((acc, curr) => {
+          return acc + curr.waste;
+        }, 0) / 1000;
+      const requireWaste = thirdParty.requiredWasteAmount;
+      const paymentPerTon = thirdParty.paymentPerTon;
+      const basicPay = totalWasteReceived * paymentPerTon;
+      const deficit = Math.max(0, requireWaste - totalWasteReceived);
+      const fine = deficit * paymentPerTon;
+      const totalBill = basicPay - fine;
+      console.log(
+        totalWasteReceived,
+        requireWaste,
+        paymentPerTon,
+        basicPay,
+        deficit,
+        fine,
+        totalBill
+      );
+      return res.status(200).json({
+        totalWasteReceived,
+        requireWaste,
+        paymentPerTon,
+        basicPay,
+        deficit,
+        fine,
+        totalBill,
+      });
     } catch (error) {
       return res.status(500).json({ errors: error.message });
     }

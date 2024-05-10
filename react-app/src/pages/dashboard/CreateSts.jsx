@@ -7,6 +7,7 @@ const CreateSts = () => {
     const payload = {
       ward: Number(data.get("ward")),
       capacity: Number(data.get("capacity")),
+      lastHour: data.get("lastHour"),
       latitude: Number(data.get("latitude")),
       longitude: Number(data.get("longitude")),
     };
@@ -19,7 +20,8 @@ const CreateSts = () => {
           if (res.status === 201) {
             alert("STS created successfully");
           }
-        }).catch(error => alert(error.response.data.errors))
+        })
+        .catch((error) => alert(error.response.data.errors));
     } catch (error) {
       console.log(error);
     }
@@ -60,6 +62,22 @@ const CreateSts = () => {
             type="number"
             placeholder="in tons"
             name="capacity"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="lastHour"
+          >
+            Last Hour
+          </label>
+          <input
+            id="lastHour"
+            name="lastHour"
+            type="time"
+            className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Time"
             required
           />
         </div>
