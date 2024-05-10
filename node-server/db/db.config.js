@@ -2,7 +2,7 @@ import { PrismaClient, RoleType } from "@prisma/client";
 import { encryptPass } from "../utils/utils.js";
 
 const prisma = new PrismaClient({
-  log: ["query", "error"],
+  log: ["error"],
 });
 
 async function main() {

@@ -30,6 +30,7 @@ import ContractorManager from "./pages/dashboard/ContractorManager";
 import ContractorRoute from "./routes/ContractorRoute";
 import WorkforceRegistration from "./pages/dashboard/WorkforceRegistration";
 import ThirdPartyToSTS from "./pages/dashboard/ThirdPartyToSTS";
+import ThirdPartyList from "./pages/dashboard/ThirdPartyList";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
               <Route path="/third-party-to-sts" element={<ThirdPartyToSTS />} />
               <Route path="/sts-vehicle-entry" element={<EntryStsVehicle />} />
               <Route path="/sts-vehicle-records" element={<StsVehicleRecords />} />
+              <Route path="/contractor-list" element={<ThirdPartyList />} />
             </Route>
             <Route element={<LandfillRoute />}>
               <Route path="/landfill-vehicle-entry" element={<EntryDump />} />

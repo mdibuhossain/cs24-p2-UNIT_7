@@ -120,16 +120,17 @@ export class stsController {
     try {
       const findSts = await prisma.sts.findUnique({
         where: {
-          id: payload.stsId,
+          id: parseInt(payload.stsId),
         },
       });
-      const datePart = payload.date.toString().split(" ")[0];
+      const datePart = payload.date.toString();
       const startingDateTime = datePart + " 00:00:00";
-      const endingDateTime = datePart + " " + findSts.lastHour;
+      // const endingDateTime = datePart + " " + findSts.lastHour;
+      const endingDateTime = datePart + " 23:59:59";
       console.log(startingDateTime, endingDateTime);
       const weightReceived = await prisma.sts_receives.findMany({
         where: {
-          stsId: payload.stsId,
+          stsId: parseInt(payload.stsId),
           contractorId: payload.contractorId,
           arrival_time: {
             gte: new Date(startingDateTime),
@@ -142,13 +143,13 @@ export class stsController {
       });
       const thirdParty = await prisma.contractor.findUnique({
         where: {
-          id: payload.contractorId,
+          id: parseInt(payload.contractorId),
         },
       });
       const totalWasteReceived =
         weightReceived.reduce((acc, curr) => {
           return acc + curr.waste;
-        }, 0) / 1000;
+        }, 0) / 1000.0;
       const requireWaste = thirdParty.requiredWasteAmount;
       const paymentPerTon = thirdParty.paymentPerTon;
       const basicPay = totalWasteReceived * paymentPerTon;

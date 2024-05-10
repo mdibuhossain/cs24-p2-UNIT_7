@@ -17,6 +17,7 @@ export const ADMIN_NAVs = [
 
 export const STS_NAVs = [
   { name: "Third party to STS", path: "/third-party-to-sts" },
+  { name: "Contractor List", path: "/contractor-list" },
   { name: "Leaving vehicle record entry", path: "/sts-vehicle-entry" },
   { name: "Vehicle records", path: "/sts-vehicle-records" },
 ];
