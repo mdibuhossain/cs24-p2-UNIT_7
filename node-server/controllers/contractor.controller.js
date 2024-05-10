@@ -89,4 +89,25 @@ export class ContractorController {
       return res.status(500).json({ error: error.message });
     }
   }
+  static async getCollectionPlans(req, res) {
+    try {
+      const collectionPlans = await prisma.collection_plan.findMany({
+        include: { Contractor: true },
+      });
+      return res.status(200).json(collectionPlans);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+  static async deleteCollectionPlan(req, res) {
+    try {
+      const { id } = req.params;
+      const deleteCollectionPlan = await prisma.collection_plan.delete({
+        where: { id: Number(id) },
+      });
+      return res.status(200).json(deleteCollectionPlan);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
 }

@@ -32,6 +32,7 @@ import WorkforceRegistration from "./pages/dashboard/WorkforceRegistration";
 import ThirdPartyToSTS from "./pages/dashboard/ThirdPartyToSTS";
 import ThirdPartyList from "./pages/dashboard/ThirdPartyList";
 import CreateCollectionPlan from "./pages/dashboard/CreateCollectionPlan";
+import ViewCollectionPlan from "./pages/dashboard/ViewCollectionPlan";
 
 function App() {
   return (
@@ -77,6 +78,7 @@ function App() {
             <Route element={<ContractorRoute />}>
               <Route path="/register-workforce" element={<WorkforceRegistration />} />
               <Route path="/create-collection-plan" element={<CreateCollectionPlan />} />
+              <Route path="/collection-plan" element={<ViewCollectionPlan />} />
             </Route>
             <Route path="/profile" element={<Profile />} />
           </Route>

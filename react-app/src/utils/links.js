@@ -30,6 +30,7 @@ export const LANDFILL_NAVs = [
 export const CONTRACTOR_NAVs = [
   { name: "Ragistration of Workforce", path: "/register-workforce" },
   { name: "Create Collection Plan", path: "/create-collection-plan" },
+  { name: "Collection Plan List", path: "/collection-plan" },
 ];
 
 export const COMMON_NAVs = [{ name: "Profile", path: "/profile" }];
