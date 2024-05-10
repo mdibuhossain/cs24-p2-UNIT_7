@@ -25,6 +25,11 @@ import DumpRecords from "./pages/dashboard/DumpRecords";
 import SingleUser from "./pages/dashboard/SingleUser";
 import AllSts from "./pages/dashboard/AllSts";
 import AllLandfill from "./pages/dashboard/AllLandfill";
+import RegisterContractor from "./pages/dashboard/RegisterContractor";
+import ContractorManager from "./pages/dashboard/ContractorManager";
+import ContractorRoute from "./routes/ContractorRoute";
+import WorkforceRegistration from "./pages/dashboard/WorkforceRegistration";
+import ThirdPartyToSTS from "./pages/dashboard/ThirdPartyToSTS";
 
 function App() {
   return (
@@ -45,6 +50,8 @@ function App() {
               <Route path="/users/:uid" element={<SingleUser />} />
               <Route path="/roles" element={<AllRoles />} />
               <Route path="/create-user" element={<CreateUser />} />
+              <Route path="/register-contractor" element={<RegisterContractor />} />
+              <Route path="/contractor-manager" element={<ContractorManager />} />
               <Route path="/update-user/:uid" element={<UpdateUser />} />
               <Route path="/assign-role" element={<AssignRole />} />
               <Route path="/all-sts" element={<AllSts />} />
@@ -56,12 +63,16 @@ function App() {
               <Route path="/add-vehicle" element={<AddVehicle />} />
             </Route>
             <Route element={<StsRoute />}>
+              <Route path="/third-party-to-sts" element={<ThirdPartyToSTS />} />
               <Route path="/sts-vehicle-entry" element={<EntryStsVehicle />} />
               <Route path="/sts-vehicle-records" element={<StsVehicleRecords />} />
             </Route>
             <Route element={<LandfillRoute />}>
               <Route path="/landfill-vehicle-entry" element={<EntryDump />} />
               <Route path="/landfill-vehicle-records" element={<DumpRecords />} />
+            </Route>
+            <Route element={<ContractorRoute />}>
+              <Route path="/register-workforce" element={<WorkforceRegistration />} />
             </Route>
             <Route path="/profile" element={<Profile />} />
           </Route>

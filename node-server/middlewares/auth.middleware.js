@@ -17,7 +17,7 @@ export const authMiddleware = (req, res, next) => {
     }
     const findUser = await prisma.user.findUnique({
       where: { id: user.id },
-      include: { Landfill: true, Sts: true },
+      include: { Landfill: true, Sts: true, Contractor: true },
     });
     if (!findUser) {
       return res.status(401).json({ message: "Unauthorized" });

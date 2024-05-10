@@ -15,6 +15,23 @@ const AllSts = () => {
         console.log(error);
       });
   }, []);
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this STS?")) {
+      axios
+        .delete(`${import.meta.env.VITE_BACKEND_URL}/sts/${id}`, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            alert("STS deleted successfully");
+            setStsList(stsList.filter((sts) => sts.id !== id));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   return (
     <div>
       <h2 className="mb-6 text-center text-3xl font-bold text-gray-900">
@@ -34,7 +51,10 @@ const AllSts = () => {
               <td className="td-class">{sts.ward}</td>
               <td className="td-class">{sts.capacity}</td>
               <td className="td-class">
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                <button
+                  onClick={() => handleDelete(sts.id)}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
                   Delete
                 </button>
               </td>

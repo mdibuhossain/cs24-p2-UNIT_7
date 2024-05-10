@@ -9,6 +9,7 @@ landfillRouter.get("/", authMiddleware, landfillController.getAllLandfills);
 landfillRouter.get("/managers", authMiddleware, roleMiddleware.isAdmin, landfillController.getManagers);
 landfillRouter.get("/:lid", authMiddleware, landfillController.getSingleLandfill);
 landfillRouter.post("/", authMiddleware, roleMiddleware.isAdmin, landfillController.createLandfill);
+landfillRouter.delete("/:lid", authMiddleware, roleMiddleware.isAdmin, landfillController.deleteLandfill);
 landfillRouter.put("/managers", authMiddleware, roleMiddleware.isAdmin, landfillController.assignManager);
 
 

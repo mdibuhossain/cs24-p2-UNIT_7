@@ -6,7 +6,8 @@ const CreateUser = () => {
     { id: 1, title: "SYSTEM_ADMIN" },
     { id: 2, title: "STS_MANAGER", disabled: true },
     { id: 3, title: "LANDFILL_MANAGER", disabled: true },
-    { id: 4, title: "UNASSIGNED" },
+    { id: 4, title: "CONTRACTOR_MANAGER", disabled: true },
+    { id: 5, title: "UNASSIGNED" },
   ]);
 
   // useEffect(() => {

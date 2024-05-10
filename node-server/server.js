@@ -11,6 +11,8 @@ import vehicleRouter from "./routes/vehicle.router.js";
 import stsRouter from "./routes/sts.router.js";
 import landfillRouter from "./routes/landfill.router.js";
 import dashboardRouter from "./routes/dashboard.router.js";
+import contractorRouter from "./routes/contractor.router.js";
+import workforceRouter from "./routes/workforce.router.js";
 
 dotenv.config();
 const app = express();
@@ -35,6 +37,8 @@ app.use("/profile", profileRouter);
 app.use("/vehicles", vehicleRouter);
 app.use("/landfills", landfillRouter);
 app.use("/dashboard", dashboardRouter);
+app.use("/workforces", workforceRouter);
+app.use("/contractors", contractorRouter);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("server is running!");

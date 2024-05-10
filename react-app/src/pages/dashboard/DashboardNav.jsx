@@ -4,6 +4,7 @@ import { AuthContext } from "../../contexts/auth.context";
 import {
   ADMIN_NAVs,
   COMMON_NAVs,
+  CONTRACTOR_NAVs,
   LANDFILL_NAVs,
   STS_NAVs,
 } from "../../utils/links";
@@ -40,9 +41,8 @@ const DashboardNav = () => {
             <div className="flex flex-col gap-y-2 font-light text-white overflow-auto">
               {user?.role === "SYSTEM_ADMIN" ? NavListView(ADMIN_NAVs) : null}
               {user?.role === "STS_MANAGER" ? NavListView(STS_NAVs) : null}
-              {user?.role === "LANDFILL_MANAGER"
-                ? NavListView(LANDFILL_NAVs)
-                : null}
+              {user?.role === "LANDFILL_MANAGER" ? NavListView(LANDFILL_NAVs) : null}
+              {user?.role === "CONTRACTOR_MANAGER" ? NavListView(CONTRACTOR_NAVs) : null}
               {NavListView(COMMON_NAVs)}
             </div>
             <button

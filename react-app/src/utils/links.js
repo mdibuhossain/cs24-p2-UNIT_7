@@ -4,6 +4,8 @@ export const ADMIN_NAVs = [
   // { name: "Available Roles", path: "/roles" },
   // { name: "Assign Role", path: "/assign-role" },
   { name: "Create User", path: "/create-user" },
+  { name: "Ragistration of Contractor", path: "/register-contractor" },
+  { name: "Contractor Manager", path: "/contractor-manager" },
   { name: "STS managers", path: "/sts-manager" },
   { name: "Landfill managers", path: "/landfill-manager" },
   { name: "Available STS", path: "/all-sts" },
@@ -14,6 +16,7 @@ export const ADMIN_NAVs = [
 ];
 
 export const STS_NAVs = [
+  { name: "Third party to STS", path: "/third-party-to-sts" },
   { name: "Leaving vehicle record entry", path: "/sts-vehicle-entry" },
   { name: "Vehicle records", path: "/sts-vehicle-records" },
 ];
@@ -21,6 +24,10 @@ export const STS_NAVs = [
 export const LANDFILL_NAVs = [
   { name: "Entry dump record", path: "/landfill-vehicle-entry" },
   { name: "Dump records", path: "/landfill-vehicle-records" },
+];
+
+export const CONTRACTOR_NAVs = [
+  { name: "Ragistration of Workforce", path: "/register-workforce" },
 ];
 
 export const COMMON_NAVs = [{ name: "Profile", path: "/profile" }];

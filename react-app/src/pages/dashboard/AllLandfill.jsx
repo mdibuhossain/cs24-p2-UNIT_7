@@ -18,7 +18,23 @@ const AllLandfill = () => {
         console.log(error);
       });
   }, []);
-
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this Landfill?")) {
+      axios
+        .delete(`${import.meta.env.VITE_BACKEND_URL}/landfills/${id}`, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            alert("Landfill deleted successfully");
+            setLandfillList(landfillList.filter((land) => land.id !== id));
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   return (
     <div>
       <h2 className="mb-6 text-center text-3xl font-bold text-gray-900">
@@ -38,7 +54,10 @@ const AllLandfill = () => {
               <td className="td-class">{land.id}</td>
               <td className="td-class">{land.capacity}</td>
               <td className="td-class">
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                <button
+                  onClick={() => handleDelete(land.id)}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
                   Delete
                 </button>
               </td>

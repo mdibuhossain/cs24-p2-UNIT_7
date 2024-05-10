@@ -9,17 +9,34 @@ datasource db {
 }
 
 model User {
-  id         Int       @id @default(autoincrement())
-  name       String?   @db.VarChar(200)
-  email      String    @unique @db.VarChar(200)
-  password   String
-  photo      String?
-  createdAt  DateTime  @default(now())
-  role       RoleType  @default(UNASSIGNED)
-  Sts        Sts?      @relation(fields: [stsId], references: [id])
-  stsId      Int?
-  Landfill   Landfill? @relation(fields: [landfillId], references: [id])
-  landfillId Int?
+  id           Int         @id @default(autoincrement())
+  email        String      @unique @db.VarChar(200)
+  password     String
+  name         String?     @db.VarChar(200)
+  contact      String?
+  photo        String?
+  createdAt    DateTime    @default(now())
+  role         RoleType    @default(UNASSIGNED)
+  stsId        Int?
+  Sts          Sts?        @relation(fields: [stsId], references: [id])
+  landfillId   Int?
+  Landfill     Landfill?   @relation(fields: [landfillId], references: [id])
+  contractorId Int?
+  Contractor   Contractor? @relation(fields: [contractorId], references: [id])
+  Workforce    Workforce[]
+}
+
+model Workforce {
+  id                  Int       @id @default(autoincrement())
+  name                String
+  dateOfBirth         DateTime?
+  dateOfHire          DateTime?
+  jobTitle            String?
+  paymentRatePerHour  String?
+  contact             String?
+  collectionRoute     String?
+  contractorManagerId Int?
+  ContractorManager   User?     @relation(fields: [contractorManagerId], references: [id])
 }
 
 model Role {
@@ -27,6 +44,7 @@ model Role {
   title RoleType @unique @default(UNASSIGNED)
 }
 
+// system admin can create vehicle
 model Vehicle {
   id                 Int                  @id @default(autoincrement())
   type               String
@@ -38,17 +56,23 @@ model Vehicle {
   dump_records       dump_record[]
 }
 
+// system admin can create sts manager
 model Sts {
   id                 Int                  @id @default(autoincrement())
   ward               Int                  @unique
   capacity           Int
   latitude           Float
   longitude          Float
+  lastHour           DateTime?
+  fine               Float?
   managers           User[]
   sts_vehicle_record sts_vehicle_record[]
   dump_records       dump_record[]
+  Contractor         Contractor[]
+  sts_receives       sts_receives[]
 }
 
+// system admin can create landfill manager
 model Landfill {
   id           Int           @id @default(autoincrement())
   capacity     Int
@@ -58,6 +82,7 @@ model Landfill {
   dump_records dump_record[]
 }
 
+// sts manager can create sts vehicle record
 model sts_vehicle_record {
   id             Int      @id @default(autoincrement())
   waste          Int
@@ -69,6 +94,20 @@ model sts_vehicle_record {
   reg_no         Int?
 }
 
+// sts manager can create sts receives record
+model sts_receives {
+  id           Int         @id @default(autoincrement())
+  waste        Int
+  typeOfWaste  String
+  vehicleType  String
+  arrival_time DateTime
+  Sts          Sts?        @relation(fields: [stsId], references: [id])
+  stsId        Int?
+  Contractor   Contractor? @relation(fields: [contractorId], references: [id])
+  contractorId Int?
+}
+
+// landfill manager can create dump record
 model dump_record {
   id             Int       @id @default(autoincrement())
   weight         Int
@@ -82,9 +121,42 @@ model dump_record {
   stsId          Int?
 }
 
+// system admin can create contractor manager
+model Contractor {
+  id                  Int            @id @default(autoincrement())
+  name                String
+  contractId          Int            @unique
+  registrationId      Int            @unique
+  tin                 String
+  contact             String
+  area                String
+  workforce           Int
+  paymentPerTon       Int
+  requiredWasteAmount Int
+  contractDuration    Int
+  registrationDate    DateTime       @default(now())
+  createdAt           DateTime       @default(now())
+  Sts                 Sts?           @relation(fields: [stsId], references: [id])
+  stsId               Int?
+  User                User[]
+  sts_receives        sts_receives[]
+}
+
+// only contractor manager can create collection plan
+model collection_plan {
+  id              Int      @id @default(autoincrement())
+  area            String
+  collectionStart DateTime
+  duration        Int
+  numberOfLabour  Int
+  numberofVans    Int
+  expectedWaste   Int
+}
+
 enum RoleType {
   UNASSIGNED
   SYSTEM_ADMIN
   STS_MANAGER
   LANDFILL_MANAGER
+  CONTRACTOR_MANAGER
 }

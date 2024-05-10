@@ -33,12 +33,25 @@ export class landfillController {
       return res.status(500).json({ errors: error.message });
     }
   }
+  static async deleteLandfill(req, res) {
+    try {
+      const { lid } = req.params;
+      const landfill = await prisma.landfill.delete({
+        where: {
+          id: Number(lid),
+        },
+      });
+      return res.status(200).json(landfill);
+    } catch (error) {
+      return res.status(500).json({ errors: error.message });
+    }
+  }
   static async assignManager(req, res) {
     try {
       const { uid, lid } = req.body;
       const findUser = await prisma.user.findUnique({
         where: { id: Number(uid) },
-        include: { Landfill: true, Sts: true },
+        include: { Landfill: true, Sts: true, Contractor: true },
       });
       if (!findUser) {
         return res.status(404).json({ message: "User not found" });
