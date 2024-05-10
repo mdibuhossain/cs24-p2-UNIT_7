@@ -70,4 +70,23 @@ export class ContractorController {
       return res.status(500).json({ error: error.message });
     }
   }
+  static async createCollectionPlan(req, res) {
+    try {
+      const payload = req.body;
+      const createCollectionPlan = await prisma.collection_plan.create({
+        data: {
+          area: payload.area,
+          collectionStart: payload.collectionStart,
+          duration: parseInt(payload.duration),
+          numberOfLabour: parseInt(payload.numberOfLabour),
+          numberofVans: parseInt(payload.numberofVans),
+          expectedWaste: parseInt(payload.expectedWaste),
+          contractorId: parseInt(payload.contractorId),
+        },
+      });
+      return res.status(201).json(createCollectionPlan);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
 }

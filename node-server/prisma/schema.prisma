@@ -123,10 +123,10 @@ model dump_record {
 
 // system admin can create contractor manager
 model Contractor {
-  id                  Int            @id @default(autoincrement())
+  id                  Int               @id @default(autoincrement())
   name                String
-  contractId          Int            @unique
-  registrationId      Int            @unique
+  contractId          Int               @unique
+  registrationId      Int               @unique
   tin                 String
   contact             String
   area                String
@@ -134,23 +134,26 @@ model Contractor {
   paymentPerTon       Int
   requiredWasteAmount Int
   contractDuration    Int
-  registrationDate    DateTime       @default(now())
-  createdAt           DateTime       @default(now())
-  Sts                 Sts?           @relation(fields: [stsId], references: [id])
+  registrationDate    DateTime          @default(now())
+  createdAt           DateTime          @default(now())
+  Sts                 Sts?              @relation(fields: [stsId], references: [id])
   stsId               Int?
   User                User[]
   sts_receives        sts_receives[]
+  collection_plan     collection_plan[]
 }
 
 // only contractor manager can create collection plan
 model collection_plan {
-  id              Int      @id @default(autoincrement())
+  id              Int         @id @default(autoincrement())
   area            String
   collectionStart DateTime
   duration        Int
   numberOfLabour  Int
   numberofVans    Int
   expectedWaste   Int
+  contractorId    Int?
+  Contractor      Contractor? @relation(fields: [contractorId], references: [id])
 }
 
 enum RoleType {
