@@ -45,6 +45,7 @@ const AllLandfill = () => {
           <tr>
             <th className="ps-4">ID</th>
             <th className="ps-4">Capacity (tons)</th>
+            <th className="ps-4">Location coordinates</th>
             <th className="ps-4">Actions</th>
           </tr>
         </thead>
@@ -53,6 +54,10 @@ const AllLandfill = () => {
             <tr key={land.id}>
               <td className="td-class">{land.id}</td>
               <td className="td-class">{land.capacity}</td>
+              <td className="td-class">
+                <p>Latitude: {land.latitude}</p>
+                <p>Longitude: {land.longitude}</p>
+              </td>
               <td className="td-class">
                 <button
                   onClick={() => handleDelete(land.id)}
