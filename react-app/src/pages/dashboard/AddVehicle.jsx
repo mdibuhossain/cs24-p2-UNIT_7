@@ -22,7 +22,8 @@ const AddVehicle = () => {
           if (res.status === 201) {
             alert("Vehicle added successfully");
           }
-        }).catch((error) => alert(error.response.data.errors))
+        })
+        .catch((error) => alert(error.response.data.errors));
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +46,7 @@ const AddVehicle = () => {
             className="shadow-md shadow-gray-300 appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="vehicleRegNo"
             type="number"
-            placeholder="Vehicle Name"
+            placeholder="Vehicle Reg. no."
             name="reg_no"
             required
           />
