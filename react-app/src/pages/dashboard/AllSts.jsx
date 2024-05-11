@@ -42,6 +42,7 @@ const AllSts = () => {
           <tr>
             <th className="ps-4">Ward no.</th>
             <th className="ps-4">Capacity (tons)</th>
+            <th className="ps-4">Location coordinates</th>
             <th className="ps-4">Actions</th>
           </tr>
         </thead>
@@ -50,6 +51,10 @@ const AllSts = () => {
             <tr key={sts.id}>
               <td className="td-class">{sts.ward}</td>
               <td className="td-class">{sts.capacity}</td>
+              <td className="td-class">
+                <p>Latitude: {sts.latitude}</p>
+                <p>Longitude: {sts.longitude}</p>
+              </td>
               <td className="td-class">
                 <button
                   onClick={() => handleDelete(sts.id)}

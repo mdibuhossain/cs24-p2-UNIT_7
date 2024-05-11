@@ -1,6 +1,16 @@
 import axios from "axios";
+import { useState } from "react";
+import Map from "react-map-gl";
 
 const CreateSts = () => {
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
+
+  const _onClickMap = (map, evt) => {
+    setLatitude(map.lngLat.lat);
+    setLongitude(map.lngLat.lng);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -8,8 +18,8 @@ const CreateSts = () => {
       ward: Number(data.get("ward")),
       capacity: Number(data.get("capacity")),
       lastHour: data.get("lastHour"),
-      latitude: Number(data.get("latitude")),
-      longitude: Number(data.get("longitude")),
+      latitude: Number(latitude),
+      longitude: Number(longitude),
     };
     try {
       axios
@@ -93,6 +103,7 @@ const CreateSts = () => {
             id="stsLocation"
             type="number"
             placeholder="Latitude"
+            value={latitude}
             name="latitude"
             required
           />
@@ -101,6 +112,7 @@ const CreateSts = () => {
             className="shadow-md shadow-gray-300 appearance-none border border-gray-300 rounded w-full py-2 px-3 number-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="number"
             placeholder="Longitude"
+            value={longitude}
             name="logitude"
             required
           />
@@ -112,6 +124,19 @@ const CreateSts = () => {
           >
             Create STS
           </button>
+        </div>
+        <div>
+          <Map
+            mapboxAccessToken="pk.eyJ1IjoicG9uaXJtYWhtdWQiLCJhIjoiY2x3MWpmZDJoMGN3bjJxb2NqcDVsYXFybiJ9.xt-bUTSAGKRRPdD4AtIhjw"
+            initialViewState={{
+              longitude: -122.4,
+              latitude: 37.8,
+              zoom: 14,
+            }}
+            onClick={_onClickMap}
+            style={{ width: 510, height: 400 }}
+            mapStyle="mapbox://styles/mapbox/streets-v9"
+          />
         </div>
       </form>
     </div>

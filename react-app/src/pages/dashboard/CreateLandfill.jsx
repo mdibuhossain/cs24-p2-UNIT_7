@@ -5,6 +5,12 @@ import Map from "react-map-gl";
 const CreateLandfill = () => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+
+  const _onClickMap = (map, evt) => {
+    setLatitude(map.lngLat.lat);
+    setLongitude(map.lngLat.lng);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -28,11 +34,6 @@ const CreateLandfill = () => {
       console.log(error);
     }
     e.target.reset();
-  };
-
-  const _onClickMap = (map, evt) => {
-    setLatitude(map.lngLat.lat);
-    setLongitude(map.lngLat.lng);
   };
 
   return (
@@ -91,20 +92,20 @@ const CreateLandfill = () => {
             Create Landfill
           </button>
         </div>
+        <div>
+          <Map
+            mapboxAccessToken="pk.eyJ1IjoicG9uaXJtYWhtdWQiLCJhIjoiY2x3MWpmZDJoMGN3bjJxb2NqcDVsYXFybiJ9.xt-bUTSAGKRRPdD4AtIhjw"
+            initialViewState={{
+              longitude: -122.4,
+              latitude: 37.8,
+              zoom: 14,
+            }}
+            onClick={_onClickMap}
+            style={{ width: 510, height: 400 }}
+            mapStyle="mapbox://styles/mapbox/streets-v9"
+          />
+        </div>
       </form>
-      <div>
-        <Map
-          mapboxAccessToken="pk.eyJ1IjoicG9uaXJtYWhtdWQiLCJhIjoiY2x3MWpmZDJoMGN3bjJxb2NqcDVsYXFybiJ9.xt-bUTSAGKRRPdD4AtIhjw"
-          initialViewState={{
-            longitude: -122.4,
-            latitude: 37.8,
-            zoom: 14,
-          }}
-          onClick={_onClickMap}
-          style={{ width: 600, height: 400 }}
-          mapStyle="mapbox://styles/mapbox/streets-v9"
-        />
-      </div>
     </div>
   );
 };
