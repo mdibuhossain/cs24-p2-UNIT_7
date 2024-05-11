@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import Map from "react-map-gl";
+import Map, { Marker } from "react-map-gl";
+import pin from "../../assets/pin.png";
 
 const CreateSts = () => {
   const [latitude, setLatitude] = useState("");
@@ -136,7 +137,15 @@ const CreateSts = () => {
             onClick={_onClickMap}
             style={{ width: 510, height: 400 }}
             mapStyle="mapbox://styles/mapbox/streets-v9"
-          />
+          >
+            <Marker
+              longitude={longitude}
+              latitude={latitude}
+              offset={[250, -400]}
+            >
+              <img src={pin} />
+            </Marker>
+          </Map>
         </div>
       </form>
     </div>

@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import Map from "react-map-gl";
+import Map, { Marker } from "react-map-gl";
+import pin from "../../assets/pin.png";
 
 const CreateLandfill = () => {
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState(23.809591);
+  const [longitude, setLongitude] = useState(90.367447);
 
   const _onClickMap = (map, evt) => {
     setLatitude(map.lngLat.lat);
@@ -96,14 +97,22 @@ const CreateLandfill = () => {
           <Map
             mapboxAccessToken="pk.eyJ1IjoicG9uaXJtYWhtdWQiLCJhIjoiY2x3MWpmZDJoMGN3bjJxb2NqcDVsYXFybiJ9.xt-bUTSAGKRRPdD4AtIhjw"
             initialViewState={{
-              longitude: -122.4,
-              latitude: 37.8,
+              longitude,
+              latitude,
               zoom: 14,
             }}
             onClick={_onClickMap}
             style={{ width: 510, height: 400 }}
             mapStyle="mapbox://styles/mapbox/streets-v9"
-          />
+          >
+            <Marker
+              longitude={longitude}
+              latitude={latitude}
+              offset={[250, -400]}
+            >
+              <img src={pin} />
+            </Marker>
+          </Map>
         </div>
       </form>
     </div>
