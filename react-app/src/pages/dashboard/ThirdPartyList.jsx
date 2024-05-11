@@ -42,7 +42,7 @@ const ThirdPartyList = () => {
   return (
     <div>
       <h2 className="mb-6 text-center text-3xl font-bold text-gray-900">
-        STS Vehicle Records
+        Third Party List
       </h2>
       <table className="border-separate w-full border-spacing-y-2 text-sm">
         <thead className="text-left">
@@ -100,13 +100,13 @@ const Bill = ({ billFile }) => {
       <>
         {billFile?.totalBill > 0 ? (
           <>
-            <p>Bill: {Math.abs(billFile.totalBill)} Taka</p>
-            <p>Fine: 0 Taka</p>
+            <p>Bill: {Math.abs(billFile.basicPay)} Taka</p>
+            <p>Fine: {Math.abs(billFile.fine)} Taka</p>
           </>
         ) : (
           <>
-            <p>Bill: 0 Taka</p>
-            <p>Fine: {Math.abs(billFile.totalBill)} Taka</p>
+            <p>Bill: {Math.abs(billFile.basicPay)} Taka</p>
+            <p>Fine: {Math.abs(billFile.fine)} Taka</p>
           </>
         )}
       </>
